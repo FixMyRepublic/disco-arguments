@@ -2,7 +2,7 @@ var static = require('node-static'),
   http = require('http'),
   util = require('util');
 
-var webroot = '/media/sink/data/projects/codemonic.net/worx/disco/nodejs/disco-arguments',
+var webroot = '/enter-path-to-your-disco-folder-here/disco-arguments',
   port = 4444;
 
 var file = new static.Server(webroot);
