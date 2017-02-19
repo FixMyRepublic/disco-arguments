@@ -1,0 +1,53 @@
+﻿<div id="wrapper">
+    <div id="header">
+        <div id="header_blue"></div>
+        <div id="header_white"></div>
+        <div id="header_content">
+            <a data-bind="attr: { href: router.navigationModel()[0].hash }">
+                <div id="header_logo"></div>
+            </a>
+            <div id="header_navigation">
+                <div class="loader pull-right" data-bind="css: { active: router.isNavigating || isLoading }">
+                    <span class="icon-spinner icon-2x icon-spin"></span>
+                </div>
+                <!-- ko foreach: router.navigationModel -->
+                    <div class="navi_point" data-bind="css: { current_page: isActive }">
+                        <a data-bind="attr: { href: hash }, html: title"></a>
+                    </div>
+                <!-- /ko -->
+                <div class="navi_point">
+                    <form class="navbar-search pull-right" data-bind="submit: search">
+                    <input type="text" name="navi_search" id="navi_search" placeholder="Search">
+                    </form>
+                </div>
+            </div>
+            <div id="header_menu_wrapper">
+                <div style="text-align: center;" class="header_signup">
+                    <a href="/signup/">Sign-On</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="view" data-bind="router: { transition: 'entrance', cacheViews: false }"></div>
+</div>
+<div id="footer">
+    <div id="footer_content">
+        <a href="/">
+            <div id="footer_logo"></div>
+        </a>
+        <div id="footer_copyright">
+            <a href="http://disco-network.org/"><i>d!sco</i>-network.org</a> | 
+            <a href="http://disco.codeplex.com/">Open Source</a> |
+            <a onclick="$('#footer_menu').show(); return false;" href="#"><b><i>d!sco</i> in action</b></a>
+        </div>
+        <div style="display: none;" id="footer_menu">
+            <a href="#">qKonsens</a> |
+         
+            <a href="#">multilectics</a> |
+         
+            <a href="#">Ontology Explorer</a> |
+         
+            <a href="http://creativecommons.org/licenses/by/3.0/">Content: CC BY 3.0</a>
+        </div>
+    </div>
+</div>

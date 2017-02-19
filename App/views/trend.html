@@ -1,0 +1,58 @@
+﻿<section>
+    <div id="content">
+        <div class="loader" data-bind="visible: questions().length == 0, css: { active: questions().length == 0 }">
+            Loading data - Please be patient <span class="icon-spinner icon-2x icon-spin"></span><br />
+            Please note that the very first request might be tremendously slow, due to limited server resources.
+        </div>
+        <div data-bind="foreach: questions">
+
+            <div data-bind="attr: { id: 'question_' + questionKey }" class="question">
+                <div class="stats question_stats">
+                    <div class="points question_points" data-bind="attr: { id: 'question_points_' + questionKey }, html: points.score"></div>
+                    <div class="points_text question_points_text">Points</div>
+                    <form onsubmit="wikiargument.raiseError('You have to be logged-in to vote.'); return false;" id="voteup_4_0" method="POST" action="">
+                        <div onclick="$('#voteup_4_0').submit();" id="vote_up_4_0" class="vote_up question_vote_up vote_up_inactive"></div>
+                        <input type="hidden" value="1" name="vote">
+                        <input type="hidden" value="4" name="questionId">
+                        <input type="hidden" value="0" name="argumentId">
+                        <input type="hidden" value="1" name="vote_select">
+                    </form>
+                    <form onsubmit="return false;" id="votedn_4_0" method="POST">
+                        <div onclick="wikiargument.vote(4, 0, -1); return false;" id="vote_dn_4_0" class="vote_dn question_vote_dn vote_dn_inactive"></div>
+                        <input type="hidden" value="-1" name="vote">
+                        <input type="hidden" value="4" name="questionId">
+                        <input type="hidden" value="0" name="argumentId">
+                        <input type="hidden" value="1" name="vote_select">
+                    </form>
+                </div>
+                <div class="question_title">
+                    <p><a href="#" data-bind="html: title, click: $parent.select"></a></p>
+                </div>
+                <div class="question_num_arguments">
+                    <div class="icon_num_arguments"></div>
+                    <span data-bind="html: argumentCount"></span>
+                </div>
+                <div class="author question_author">Added <span data-bind="html: timeElapsed"></span> ago by <a data-bind="attr: { href: '/users/' + author.key }, html: author.name"></a></div>
+                <div class="tags">
+                    <ul data-bind="foreach: tags">
+                        <li class="tag"><a data-bind="attr: { href: '/tags/' + $data }, html: $data"></a></li>
+                    </ul>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+
+        <a onclick="wikiargument.raiseError('You have to be logged-in to compose arguments.'); return false;" href="/new-question/">
+            <button class="button_orange button_new_question">New Question</button>
+        </a>
+
+        <div class="pagination pagination_questions">
+            <div class="pagination_x_of_y">Page 1 of 1</div>
+            <a href="/0/">
+                <span class="pagination_icon pagination_icon_active">
+                    <div>1</div>
+                </span>
+            </a>
+        </div>
+    </div>
+</section>

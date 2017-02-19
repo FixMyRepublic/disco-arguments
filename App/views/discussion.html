@@ -1,0 +1,166 @@
+﻿<section>
+    <div id="content_wide">
+        <div class="thin" data-bind="with: currentQuestion">
+            <div class="question_tabs">
+                <div class="tab tab_active">
+                    <a data-bind="text: $root.displayName"></a>
+                </div>
+                <div class="tab">
+                    <a href="/details">Details</a>
+                </div>
+                <div class="tab">
+                    <a>Follow: No</a>
+                </div>
+            </div>
+
+            <div class="question question_no_margin" data-bind="attr: { id: 'question_' + questionKey }">
+                <div class="stats question_stats" data-bind="template: { name: 'argument-points-template' }">
+                    <div class="points question_points" data-bind="attr: { id: 'question_points_' + questionKey }, html: points.score"></div>
+                    <div class="points_text question_points_text">Points</div>
+                    <form id="voteup_321_0" onsubmit='wikiargument.raiseError("You have to be logged-in to vote."); return false;' action="" method="POST">
+                        <div class="vote_up question_vote_up vote_up_inactive" id="vote_up_321_0" onclick="$('#voteup_321_0').submit();"></div>
+                        <input name="vote" type="hidden" value="1">
+                        <input name="questionId" type="hidden" value="321">
+                        <input name="argumentId" type="hidden" value="0">
+                        <input name="vote_select" type="hidden" value="1">
+                    </form>
+                    <form id="votedn_321_0" onsubmit="return false;" action="" method="POST">
+                        <div class="vote_dn question_vote_dn vote_dn_inactive" id="vote_dn_321_0" onclick="wikiargument.vote(321, 0, -1); return false;"></div>
+                        <input name="vote" type="hidden" value="-1">
+                        <input name="questionId" type="hidden" value="321">
+                        <input name="argumentId" type="hidden" value="0">
+                        <input name="vote_select" type="hidden" value="1">
+                    </form>
+                </div>
+                <div class="question_title">
+                    <p><a href="discussion" data-bind="attr: { title: abstract }, html: title"></a></p>
+                </div>
+                <div class="question_num_arguments">
+                    <div class="icon_num_arguments"></div>
+                    <span data-bind="html: argumentCount"></span>
+                </div>
+                <div class="author question_author">Added <span data-bind="html: timeElapsed"></span> ago by <a data-bind="attr: { href: '/users/' + author.key }, html: author.name"></a></div>
+                <div class="tags">
+                    <ul data-bind="foreach: tags">
+                        <li class="tag"><a data-bind="attr: { href: '/tags/' + $data }, html: $data"></a></li>
+                    </ul>
+                </div>
+                <div class="clear"></div>
+            </div>
+
+            <div class="vote_distribution">
+                <button class="checkin_pro">Check-in</button>
+                <div class="pro_perc">Yes 75%</div>
+                <div class="question_vote_count" style="display: none;">
+                    8 Votes<div class="arrow"></div>
+                </div>
+                <div class="distribution">
+                    <div class="distribution_pro" style="width: 279px;"></div>
+                    <div class="distribution_con" style="border-radius: 0px 15px 15px 0px; width: 93px;"></div>
+                </div>
+                <button class="checkin_con">Check-in</button>
+                <div class="con_perc">No 25%</div>
+            </div>
+
+        </div>
+
+        <div class="arguments">
+            <div class="arguments_pro">
+                <!-- ko foreach: currentRelated -->
+                <div class="argument_wrapper" data-bind="if: ($data.type() == 'pro'), attr: { id: 'argument_' + questionKey }">
+                    <a href="#">
+                        <div class="counter_argument_box counter_argument_box_pro" data-bind="template: { name: 'counter-argument-template' }"></div>
+                    </a>
+                    <div class="argument argument_pro">
+                        <div class="stats argument_stats" data-bind="template: { name: 'argument-points-template' }"></div>
+
+                        <!-- ko template: { name: 'argument-template' } --><!-- /ko -->
+                        <div class="argument_pro_bar"></div>
+                    </div>
+                </div>
+                <!-- /ko -->
+
+                <a href="#">
+                    <div class="button_argument button_new_argument_pro" data-bind="droppable: 'pro'">
+                        <span class="click">Click here to add a Pro</span>
+                        <span class="drag">Drop here to add as Pro</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="arguments_con">
+                <!-- ko foreach: currentRelated -->
+                <div class="argument_wrapper" data-bind="if: ($data.type() == 'con'), attr: { id: 'argument_' + questionKey }">
+                    <a href="#">
+                        <div class="counter_argument_box counter_argument_box_con" data-bind="template: { name: 'counter-argument-template' }"></div>
+                    </a>
+                    <div class="argument argument_con">
+                        <div class="stats argument_stats" data-bind="template: { name: 'argument-points-template' }"></div>
+
+                        <!-- ko template: { name: 'argument-template' } --><!-- /ko -->
+                        <div class="argument_con_bar"></div>
+                    </div>
+                </div>
+                <!-- /ko -->
+
+                <a href="#">
+                    <div class="button_argument button_new_argument_con" data-bind="droppable: 'con'">
+                        <span class="click">Click here to add a Con</span>
+                        <span class="drag">Drop here to add as Con</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="clear"></div>
+        </div>
+
+
+        <div class="related">
+            <hr />
+            <div>Related posts that are neither agreements nor disagreements. Just drag'n'drop them as Pro or Con arguments.</div>
+
+            <div class="arguments_general" data-bind="foreach: currentRelated">
+                <div data-bind="if: ($data.type() == ''), attr: { id: 'argument_' + questionKey }" class="argument_wrapper_wide">
+                    <div class="argument argument_general" data-bind="draggable: $data">
+                        <div class="stats argument_stats">
+                            <div class="move-cross" title="Click here and move your mouse to drag this argument."></div>
+                        </div>
+                        <!-- ko template: { name: 'argument-template' } --><!-- /ko -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/html" id="argument-template">
+            <div class="argument_headline">
+                <a data-bind="html: title" href="#">N/A</a>
+            </div>
+            <div class="argument_abstract" data-bind="html: abstract">N/A</a></div>
+            <div class="author question_author">Added <span data-bind="html: timeElapsed"></span> ago by <a data-bind="attr: { href: '/users/' + author.key }, html: author.name"></a></div>
+
+            <!-- ko if: ($data.type() != '') -->
+            <div class="argument-actions">
+                <div class="icon-argument icon-argument-delete" title="Click here to remove this argument." data-bind="click: $parent.resetArgument"></div>
+                <div class="icon-argument icon-argument-update" title="Click here to edit this argument." data-bind="click: $parent.editArgument"></div>
+            </div>
+            <!-- /ko -->
+        </script>
+
+        <script type="text/html" id="counter-argument-template">
+            <div class="count" data-bind="html: argumentCount">0</div>
+            <div class="count_text">Counter arguments</div>
+            <div class="plus_sign"></div>
+            <div class="line"></div>
+        </script>
+
+        <script type="text/html" id="argument-points-template">
+            <div class="points argument_points" data-bind="attr: { id: 'argument_points_' + questionKey }, html: points.score"></div>
+            <div class="points_text argument_points_text">Points</div>
+            <div class="vote_up argument_vote_up vote_up_inactive" id="vote_up_321_2068"></div>
+            <div class="vote_dn argument_vote_dn vote_dn_inactive" id="vote_dn_321_2068"></div>
+        </script>
+
+        <div class="clear"></div>
+    </div>
+
+</section>

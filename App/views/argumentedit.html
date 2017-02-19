@@ -1,0 +1,34 @@
+﻿<div class="modal-content modal-dialog">
+    <div class="modal-header"><h3>Edit Argument</h3></div>
+    <div class="modal-body">
+        <div class="new_argument" data-bind="with: currentArgument">
+            <div class="label">Headline</div>
+            <div class="input">
+                <textarea name="new_argument_headline" id="new_argument_headline" maxlength="25" data-bind="value: title"></textarea>
+                <span class="characters_left"><span id="argument_headline_chars_left">25</span> chars left</span>
+                <div class="spellcheck_button spellcheck_button_args" id="btn_spellcheck_headline"></div>
+                <script type="text/javascript">wikiargument.initSpellcheck('new_argument_headline', 'btn_spellcheck_headline', 'de');</script>
+            </div>
+            <div class="label">Argument</div>
+            <div class="input">
+                <textarea name="new_argument_abstract" id="new_argument_abstract" maxlength="140" data-bind="value: abstract"></textarea>
+                <span class="characters_left"><span id="argument_headline_abs_chars_left">140</span> chars left</span>
+                <div class="spellcheck_button spellcheck_button_args" id="btn_spellcheck_abstract"></div>
+                <script type="text/javascript">wikiargument.initSpellcheck('new_argument_abstract', 'btn_spellcheck_abstract', 'de');</script>
+            </div>
+            <div class="label">Argument Details</div>
+            <div class="input">
+                <textarea name="new_argument_details" id="new_argument_details" disabled>Sorry, but details are not supported yet!</textarea>
+                <span class="characters_written"><span id="argument_details_chars_written">0</span> chars written</span>
+                <div class="spellcheck_button spellcheck_button_args" id="btn_spellcheck_details"></div>
+                <script type="text/javascript">wikiargument.initSpellcheck('new_argument_details', 'btn_spellcheck_details', 'de');</script>
+            </div>
+            <input name="new_argument" type="hidden" value="1">
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="modal-footer">
+        <button class="button_blue" id="buttonSubmit" data-bind="click: save">Send</button>
+        <button class="button_orange" id="buttonCancel" data-bind="click: cancel">Cancel</button>
+    </div>
+</div>
